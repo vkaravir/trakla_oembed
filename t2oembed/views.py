@@ -12,7 +12,8 @@ def oembed(request):
   else:
     e = get_object_or_404(Exercise, url=request.GET['url'])
     data = {"version": "1.0", "type": "rich", 
-            "html": render_to_string("applet.html", {"e": e})}
+            "html": render_to_string("applet.html", {"e": e}),
+            "width": e.width, "height": e.height}
     format = request.GET.get('format', 'json')
     if format == 'json':
       return _jsonresponse(request, data)
